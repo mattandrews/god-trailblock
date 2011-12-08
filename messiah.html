@@ -339,10 +339,10 @@
                 ],
                 "footerTrails":[
                     {
-                        "columns":4,
+                        "columns":8,
                         "layers":[
                             {
-                                "columns":4,
+                                "columns":8,
                                 "elements":[
                                     {
                                         "item":"headline"
@@ -412,68 +412,70 @@
         }
 
         function worship() {
-                
-                var deity = json2;
+                var deity = json2; // change to "json" to see another layout example
                 var html = '';
-
                 html += '<div class="' + column_switcher(deity.component.columns) + '">';
+                    html += praise(deity, deity.component.topDown);
+                    html += praise(deity, deity.component.footerTrails);
+                html += '</div>';
+                jQ(html).appendTo('body');
+        }
 
-                var PARENT_SPACE_AVAILABLE = deity.component.columns;
 
-                for(var i in deity.component.topDown) {
-                
-                    var trail_metadata = deity.component.topDown[i];
-                    var CHILD_SPACE_AVAILABLE = trail_metadata.columns;
-                    var parent_clear_case = '';
+        function praise(object, trail_list) {
 
-                    PARENT_SPACE_AVAILABLE = PARENT_SPACE_AVAILABLE - trail_metadata.columns;
-                    if(parent_edge_case === ' edge') {
-                        parent_clear_case = ' clearleft';
+            var PARENT_SPACE_AVAILABLE = object.component.columns;
+            var html = '';
+            
+            for(var i in trail_list) {
+
+                var trail_metadata = trail_list[i];
+                var CHILD_SPACE_AVAILABLE = trail_metadata.columns;
+                var parent_clear_case = '';
+
+                PARENT_SPACE_AVAILABLE = PARENT_SPACE_AVAILABLE - trail_metadata.columns;
+                if(parent_edge_case === ' edge') {
+                    parent_clear_case = ' clearleft';
+                }
+                var parent_edge_case = '';
+
+                if(PARENT_SPACE_AVAILABLE === 0) {
+                    PARENT_SPACE_AVAILABLE = object.component.columns;
+                    parent_edge_case = ' edge';
+                }
+
+                html += '<div class="' + column_switcher(trail_metadata.columns) + parent_edge_case + parent_clear_case + '">';
+
+                for(var j in trail_metadata.layers) {
+
+                    var layer = trail_metadata.layers[j];
+                    var child_clear_case = '';
+
+                    CHILD_SPACE_AVAILABLE = CHILD_SPACE_AVAILABLE - layer.columns;
+                    if(child_edge_case === ' edge') {
+                        child_clear_case = ' clearleft';
                     }
-                    var parent_edge_case = '';
-                    
-                    if(PARENT_SPACE_AVAILABLE === 0) {
-                        PARENT_SPACE_AVAILABLE = deity.component.columns;
-                        parent_edge_case = ' edge';
+                    var child_edge_case = '';
+
+                    if(CHILD_SPACE_AVAILABLE === 0) {
+                        CHILD_SPACE_AVAILABLE = trail_metadata.columns;
+                        child_edge_case = ' edge';
                     }
 
-                    // need to check edge_case here too
-                    html += '<div class="' + column_switcher(trail_metadata.columns) + parent_edge_case + parent_clear_case + '">';
-                                        
-                    for(var j in trail_metadata.layers) {
+                    html += '<div class="' + column_switcher(layer.columns) + child_edge_case + child_clear_case + '">';
 
-                        var layer = trail_metadata.layers[j];
-                        var child_clear_case = '';
-
-                        CHILD_SPACE_AVAILABLE = CHILD_SPACE_AVAILABLE - layer.columns;
-                        if(child_edge_case === ' edge') {
-                            child_clear_case = ' clearleft';
-                        }
-                        var child_edge_case = '';
-
-                        if(CHILD_SPACE_AVAILABLE === 0) {
-                            CHILD_SPACE_AVAILABLE = trail_metadata.columns;
-                            child_edge_case = ' edge';
-                        }
-
-                        html += '<div class="' + column_switcher(layer.columns) + child_edge_case + child_clear_case + '">';
-
-                        for(var k in layer.elements) {
-                            var element = layer.elements[k];
-                            html += '<p>' + generate_element(i, element.item) + '</p>'
-                        }
-
-                        html += '</div>';
+                    for(var k in layer.elements) {
+                        var element = layer.elements[k];
+                        html += '<p>' + generate_element(i, element.item) + '</p>'
                     }
 
                     html += '</div>';
                 }
 
-                // todo - footer
-
                 html += '</div>';
+            }
 
-                jQ(html).appendTo('body');
+            return html;
         }
 
         function generate_element(index, elementType) {
