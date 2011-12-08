@@ -358,8 +358,8 @@
         var content = {};
 
         jQ(document).ready(function(){
-
-            var url = 'http://content.guardianapis.com/?format=json&show-fields=all&show-editors-picks=true&order-by=newest';
+            var api_key = 'LOL REMOVED 4 HACK0RZ'; // put one in if you know it, otherwise no images.
+            var url = 'http://content.guardianapis.com/?format=json&show-fields=all&show-editors-picks=true&order-by=newest&show-media=all&api-key=' + api_key;
             jQ.ajax({
                 url: url,
                 dataType: 'jsonp',
@@ -407,6 +407,47 @@
                     break;
                 case 12:
                     return "twelve-col";
+                    break;
+            }
+        }
+
+        function pixel_switcher(num) {
+            switch(num) {
+                case 1:
+                    return 60;
+                    break;
+                case 2:
+                    return 140;
+                    break;
+                case 3:
+                    return 220;
+                    break;
+                case 4:
+                    return 300;
+                    break;
+                case 5:
+                    return 380;
+                    break;
+                case 6:
+                    return 460;
+                    break;
+                case 7:
+                    return 540;
+                    break;
+                case 8:
+                    return 620;
+                    break;
+                case 9:
+                    return 700;
+                    break;
+                case 10:
+                    return 780;
+                    break;
+                case 11:
+                    return 860;
+                    break;
+                case 12:
+                    return 940;
                     break;
             }
         }
@@ -466,7 +507,7 @@
 
                     for(var k in layer.elements) {
                         var element = layer.elements[k];
-                        html += '<p>' + generate_element(i, element.item) + '</p>'
+                        html += '<p>' + generate_element(i, element.item, trail_metadata.columns) + '</p>'
                     }
 
                     html += '</div>';
@@ -478,12 +519,13 @@
             return html;
         }
 
-        function generate_element(index, elementType) {
+        function generate_element(index, elementType, width) {
             var trail = content.response.editorsPicks[index];
             var response = '';
             switch(elementType) {
                 case "trailPicture":
-                    response = '<img src="'+trail.fields.thumbnail+'" />';
+                    var img = get_image(trail, width);
+                    response = '<img src="'+img+'" />';
                     break;
                 case "strap":
                     response = '<strong>' + trail.sectionName + '</strong>';
@@ -502,6 +544,20 @@
                     break;
             }
             return response;
+        }
+
+        function get_image(trail, width) {
+            var pixel_width = pixel_switcher(width);
+
+            for(var i in trail.mediaAssets) {
+                var img = trail.mediaAssets[i];
+                if(img.fields.width == pixel_width) {
+                    return img.file;
+                }
+            }
+
+            return trail.fields.thumbnail;
+
         }
 
     </script>
