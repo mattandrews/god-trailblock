@@ -1,0 +1,509 @@
+<!doctype html>
+<html>
+<head>
+	<title>God Trailblock - alpha (and omega) v0.1</title>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+
+    <style>
+        .eleven-col,.ten-col,.nine-col,.eight-col,.seven-col,.six-col,.five-col,.four-col,.three-and-a-half-col,.three-col,.two-and-a-half-col,.two-col,.one-and-a-half-col,.one-col{float:left;overflow:hidden!important;margin-right:20px; outline: 1px solid #ccc; }
+        .three-and-a-half-col,.two-and-a-half-col,.one-and-a-half-col{margin-right:10px;}
+        .twelve-col{clear:both;position:relative;width:940px;}
+        .eleven-col{width:860px;}
+        .ten-col{width:780px;}
+        .nine-col{width:700px;}
+        .eight-col{width:620px;}
+        .seven-col{width:540px;}
+        .six-col{width:460px!important;}
+        .five-and-a-half-col{width:425px;}
+        .five-col{width:380px;}
+        .four-and-a-half-col{width:345px;}
+        .four-col{width:300px;}
+        .three-and-a-half-col{width:265px;}
+        .three-col{width:220px;}
+        .two-and-a-half-col{width:185px;}
+        .two-col{width:140px!important;}
+        .one-and-a-half-col{width:105px;}
+        .one-col{width:60px;}
+        .last,.edge{margin-right:0!important;}
+
+        .clearleft {
+            clear: left;
+        }
+    </style>
+
+    <script>
+        var jQ = jQuery.noConflict();
+
+        var json = {
+            "component": {
+                "columns":4,
+                "topDown":[
+                    { /* first trail */
+                        "columns":4,
+                        "options":{
+                            "headerTrail":"yes"
+                        },
+                        "layers":[
+                            {
+                                "columns":4,
+                                "elements":[
+                                    {
+                                        "item":"trailPicture"
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    { /* second trail */
+                        "columns":4,
+                        "options":{
+
+                        },
+                        "layers":[
+                            {
+                                "columns":4,
+                                "elements":[
+                                    {
+                                        "item":"strap",
+                                        "options":{
+                                            "strapType":"section"
+                                        }
+                                    }
+                                ]
+                            },
+                            {
+                                "columns":4,
+                                "elements":[
+                                    {
+                                        "item":"headline"
+                                    }
+                                ]
+                            },
+                            {
+                                "columns":2,
+                                "elements":[
+                                    {
+                                        "item":"trailPicture"
+                                    }
+                                ]
+                            },
+                            {
+                                "columns":2,
+                                "elements":[
+                                    {
+                                        "item":"trailText"
+                                    }
+                                ]
+                            },
+                            {
+                                "columns":4,
+                                "elements":[
+                                    {
+                                        "item":"comments"
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ],
+                "footerTrails":[
+                    {
+                        "columns":4,
+                        "layers":[
+                            {
+                                "columns":4,
+                                "elements":[
+                                    {
+                                        "item":"headline"
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            }
+        };
+
+        var json2 = {
+            "component": {
+                "columns":8,
+                "topDown":[
+                    { /* first trail */
+                        "columns":8,
+                        "options":{
+                            "headerTrail":"yes"
+                        },
+                        "layers":[
+                            {
+                                "columns":8,
+                                "elements":[
+                                    {
+                                        "item":"big heading area"
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    { /* second trail */
+                        "columns":4,
+                        "options":{
+
+                        },
+                        "layers":[
+                            {
+                                "columns":4,
+                                "elements":[
+                                    {
+                                        "item":"trailPicture"
+                                    }
+                                ]
+                            },
+                            {
+                                "columns":4,
+                                "elements":[
+                                    {
+                                        "item":"headline"
+                                    }
+                                ]
+                            },
+                            {
+                                "columns":4,
+                                "elements":[
+                                    {
+                                        "item":"comments"
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    { /* third trail */
+                        "columns":4,
+                        "options":{
+
+                        },
+                        "layers":[
+                            {
+                                "columns":4,
+                                "elements":[
+                                    {
+                                        "item":"trailPicture"
+                                    }
+                                ]
+                            },
+                            {
+                                "columns":4,
+                                "elements":[
+                                    {
+                                        "item":"headline"
+                                    }
+                                ]
+                            },
+                            {
+                                "columns":4,
+                                "elements":[
+                                    {
+                                        "item":"comments"
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    { /* fourth trail */
+                        "columns":2,
+                        "options":{
+
+                        },
+                        "layers":[
+                            {
+                                "columns":2,
+                                "elements":[
+                                    {
+                                        "item":"trailPicture"
+                                    }
+                                ]
+                            },
+                            {
+                                "columns":2,
+                                "elements":[
+                                    {
+                                        "item":"headline"
+                                    }
+                                ]
+                            },
+                            {
+                                "columns":2,
+                                "elements":[
+                                    {
+                                        "item":"comments"
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    { /* fifth trail */
+                        "columns":2,
+                        "options":{
+
+                        },
+                        "layers":[
+                            {
+                                "columns":2,
+                                "elements":[
+                                    {
+                                        "item":"trailPicture"
+                                    }
+                                ]
+                            },
+                            {
+                                "columns":2,
+                                "elements":[
+                                    {
+                                        "item":"headline"
+                                    }
+                                ]
+                            },
+                            {
+                                "columns":2,
+                                "elements":[
+                                    {
+                                        "item":"comments"
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    { /* sixth trail */
+                        "columns":2,
+                        "options":{
+
+                        },
+                        "layers":[
+                            {
+                                "columns":2,
+                                "elements":[
+                                    {
+                                        "item":"trailPicture"
+                                    }
+                                ]
+                            },
+                            {
+                                "columns":2,
+                                "elements":[
+                                    {
+                                        "item":"headline"
+                                    }
+                                ]
+                            },
+                            {
+                                "columns":2,
+                                "elements":[
+                                    {
+                                        "item":"comments"
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    { /* seventh trail */
+                        "columns":2,
+                        "options":{
+
+                        },
+                        "layers":[
+                            {
+                                "columns":2,
+                                "elements":[
+                                    {
+                                        "item":"trailPicture"
+                                    }
+                                ]
+                            },
+                            {
+                                "columns":2,
+                                "elements":[
+                                    {
+                                        "item":"headline"
+                                    }
+                                ]
+                            },
+                            {
+                                "columns":2,
+                                "elements":[
+                                    {
+                                        "item":"comments"
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ],
+                "footerTrails":[
+                    {
+                        "columns":4,
+                        "layers":[
+                            {
+                                "columns":4,
+                                "elements":[
+                                    {
+                                        "item":"headline"
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            }
+        };
+
+        var content = {};
+
+        jQ(document).ready(function(){
+
+            var url = 'http://content.guardianapis.com/?format=json&show-fields=all&show-editors-picks=true&order-by=newest';
+            jQ.ajax({
+                url: url,
+                dataType: 'jsonp',
+                success: function(gu_content) {
+                    content = gu_content;
+                    worship();
+                }
+            });
+        });
+
+        function column_switcher(num) {
+            switch(num) {
+                case 1:
+                    return "one-col";
+                    break;
+                case 2:
+                    return "two-col";
+                    break;
+                case 3:
+                    return "three-col";
+                    break;
+                case 4:
+                    return "four-col";
+                    break;
+                case 5:
+                    return "five-col";
+                    break;
+                case 6:
+                    return "six-col";
+                    break;
+                case 7:
+                    return "seven-col";
+                    break;
+                case 8:
+                    return "eight-col";
+                    break;
+                case 9:
+                    return "nine-col";
+                    break;
+                case 10:
+                    return "ten-col";
+                    break;
+                case 11:
+                    return "eleven-col";
+                    break;
+                case 12:
+                    return "twelve-col";
+                    break;
+            }
+        }
+
+        function worship() {
+                
+                var deity = json2;
+                var html = '';
+
+                html += '<div class="' + column_switcher(deity.component.columns) + '">';
+
+                var PARENT_SPACE_AVAILABLE = deity.component.columns;
+
+                for(var i in deity.component.topDown) {
+                
+                    var trail_metadata = deity.component.topDown[i];
+                    var CHILD_SPACE_AVAILABLE = trail_metadata.columns;
+                    var parent_clear_case = '';
+
+                    PARENT_SPACE_AVAILABLE = PARENT_SPACE_AVAILABLE - trail_metadata.columns;
+                    if(parent_edge_case === ' edge') {
+                        parent_clear_case = ' clearleft';
+                    }
+                    var parent_edge_case = '';
+                    
+                    if(PARENT_SPACE_AVAILABLE === 0) {
+                        PARENT_SPACE_AVAILABLE = deity.component.columns;
+                        parent_edge_case = ' edge';
+                    }
+
+                    // need to check edge_case here too
+                    html += '<div class="' + column_switcher(trail_metadata.columns) + parent_edge_case + parent_clear_case + '">';
+                                        
+                    for(var j in trail_metadata.layers) {
+
+                        var layer = trail_metadata.layers[j];
+                        var child_clear_case = '';
+
+                        CHILD_SPACE_AVAILABLE = CHILD_SPACE_AVAILABLE - layer.columns;
+                        if(child_edge_case === ' edge') {
+                            child_clear_case = ' clearleft';
+                        }
+                        var child_edge_case = '';
+
+                        if(CHILD_SPACE_AVAILABLE === 0) {
+                            CHILD_SPACE_AVAILABLE = trail_metadata.columns;
+                            child_edge_case = ' edge';
+                        }
+
+                        html += '<div class="' + column_switcher(layer.columns) + child_edge_case + child_clear_case + '">';
+
+                        for(var k in layer.elements) {
+                            var element = layer.elements[k];
+                            html += '<p>' + generate_element(i, element.item) + '</p>'
+                        }
+
+                        html += '</div>';
+                    }
+
+                    html += '</div>';
+                }
+
+                // todo - footer
+
+                html += '</div>';
+
+                jQ(html).appendTo('body');
+        }
+
+        function generate_element(index, elementType) {
+            var trail = content.response.editorsPicks[index];
+            var response = '';
+            switch(elementType) {
+                case "trailPicture":
+                    response = '<img src="'+trail.fields.thumbnail+'" />';
+                    break;
+                case "strap":
+                    response = '<strong>' + trail.sectionName + '</strong>';
+                    break;
+                case "headline":
+                    response = '<h3>' + trail.webTitle + '</h3>';
+                    break;
+                case "trailText":
+                    response = '<p>' + trail.fields.trailText + '</p>';
+                    break;
+                case "comments":
+                    response = 'Comments: ' + trail.fields.commentable;
+                    break;
+                default:
+                    response = 'unsupported element type';
+                    break;
+            }
+            return response;
+        }
+
+    </script>
+</head>
+<body>
+</body>
+</html>
